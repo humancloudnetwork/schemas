@@ -169,6 +169,7 @@
                 "method",
                 "fundeeType",
                 "expiration",
+                "distance",
                 "conditions"
             ],
             "additionalProperties": false
