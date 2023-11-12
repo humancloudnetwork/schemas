@@ -125,6 +125,12 @@
                     "type": "string",
                     "pattern": "^P(?!$)(?:(\\d+Y)?(\\d+M)?(\\d+D)?)(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$"
                 },
+                "distance": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/InvestmentFundAllocationDistanceObject"
+                    }
+                },
                 "conditions": {
                     "type": "object",
                     "properties": {
@@ -232,6 +238,34 @@
                     ]
                 }
             }
+        },
+        "InvestmentFundAllocationDistanceObject": {
+            "type": "object",
+            "properties": {
+                "boundry": {
+                    "type": "string"
+                },
+                "boundryType": {
+                    "type": "string",
+                    "enum": [
+                        "INTERNAL",
+                        "LOCAL",
+                        "REGIONAL",
+                        "NATIONAL",
+                        "INDUSTRY",
+                        "NETWORK"
+                    ]
+                },
+                "allocationRatio": {
+                    "type": "number",
+                    "minimum": 0
+                }
+            },
+            "required": [
+                "boundry",
+                "boundryType",
+                "allocationRatio"
+            ]
         }
     }
 }
