@@ -168,6 +168,8 @@
         },
         "allocation": {
             "type": "object",
+            "title": "Allocation definitions",
+            "description": "Defines the set conditions and criteria for fund allocations, including the allocation instrument, method, fundee type, expiration period, and other conditions. If an expiration duration is set, the fundee needs to claim the allocated funds within the period determined by 'createdAt' plus the 'expiration' duration.",
             "properties": {
                 "instrument": {
                     "type": "array",
@@ -176,13 +178,19 @@
                         "enum": [
                             "GRANT"
                         ]
-                    }
+                    },
+                    "title": "Allocation Instrument",
+                    "description": "The instruments or methods available for allocating funds."
                 },
                 "method": {
                     "type": "string",
                     "enum": [
-                        "AUTOMATED"
-                    ]
+                        "AUTOMATED",
+                        "COMMITTEE"
+                    ],
+                    "title": "Allocation Method",
+                    "description": "Represents the methods by which the fund allocates its resources.",
+                    "$comment": "'AUTOMATED': Allocation based on predefined criteria and algorithm. 'COMMITTEE': Allocation decisions made by a group through deliberation and consensus."
                 },
                 "fundeeType": {
                     "type": "array",
@@ -192,17 +200,23 @@
                             "Person",
                             "Profile"
                         ]
-                    }
+                    },
+                    "title": "Fundee type",
+                    "description": "Determines the type of fundee (e.g., individual, organization) eligible for the allocation."
                 },
                 "expiration": {
                     "type": "string",
-                    "pattern": "^P(?!$)(?:(\\d+Y)?(\\d+M)?(\\d+D)?)(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$"
+                    "pattern": "^P(?!$)(?:(\\d+Y)?(\\d+M)?(\\d+D)?)(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$",
+                    "title": "Expire after",
+                    "description": "The duration after which an unclaimed allocation will expire. The expiration period starts from 'createdAt' at the allocation object and lasts for the specified duration."
                 },
                 "distance": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/InvestmentFundAllocationDistanceObject"
-                    }
+                    },
+                    "title": "Fund Allocation Scope",
+                    "description": "Defines the diverse scopes for fund allocation, encompassing geographical areas, industry sectors, networks, and organizational entities. This attribute facilitates targeted allocation strategies, such as channeling capital to specific industries, supporting networks in smart city infrastructures, or focusing on distinct geographical regions. It enables precise and strategic distribution of funds across various dimensions and contexts."
                 },
                 "conditions": {
                     "type": "object",
@@ -320,7 +334,9 @@
             "properties": {
                 "boundry": {
                     "type": "string",
-                    "minLength": 1
+                    "minLength": 1,
+                    "title": "Boundary Identifier",
+                    "description": "Uniquely identifies the target area or entity for fund allocation. This ID can represent various allocation scopes such as specific geographic regions, industry sectors, or network segments."
                 },
                 "boundryType": {
                     "type": "string",
@@ -331,11 +347,16 @@
                         "NATIONAL",
                         "INDUSTRY",
                         "NETWORK"
-                    ]
+                    ],
+                    "title": "Boundary Type",
+                    "description": "Defines the category of the allocation boundary. Includes options like internal, local, regional, national, industry-specific, or network-based, offering flexibility in targeting fund distribution to diverse and strategic areas.",
+                    "$comment": "Describes the scope of fund allocation boundaries. 'INTERNAL': Within an entity. 'LOCAL': City-level. 'REGIONAL': Larger areas like boroughs. 'NATIONAL': Country or state level. 'INDUSTRY': Specific industry sectors. 'NETWORK': Global networks, location-independent."
                 },
                 "allocationRatio": {
                     "type": "number",
-                    "minimum": 0
+                    "minimum": 0,
+                    "title": "Allocation Ratio",
+                    "description": "Specifies the proportion of funds allocated to a particular boundary. This ratio is crucial for balancing the distribution of funds across various categories, ensuring that each area or sector receives an allocation in line with its strategic importance or operational needs."
                 }
             },
             "required": [
