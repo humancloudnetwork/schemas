@@ -40,10 +40,12 @@
                     "type": "object",
                     "properties": {
                         "id": {
-                            "type": "string"
+                            "type": "string",
+                            "minLength": 1
                         },
                         "ns": {
-                            "type": "string"
+                            "type": "string",
+                            "minLength": 1
                         }
                     },
                     "required": [
@@ -69,7 +71,8 @@
             "type": "object",
             "properties": {
                 "start": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 1
                 },
                 "duration": {
                     "type": "string",
@@ -135,7 +138,8 @@
                     "type": "object",
                     "properties": {
                         "id": {
-                            "type": "string"
+                            "type": "string",
+                            "minLength": 1
                         },
                         "description": {
                             "type": [
@@ -212,7 +216,8 @@
             "type": "object",
             "properties": {
                 "did": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 1
                 },
                 "displayName": {
                     "type": "string"
