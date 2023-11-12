@@ -244,7 +244,8 @@
             "type": "object",
             "properties": {
                 "boundry": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 1
                 },
                 "boundryType": {
                     "type": "string",
