@@ -54,15 +54,10 @@
                             "id": {
                                 "type": "string",
                                 "minLength": 1
-                            },
-                            "ns": {
-                                "type": "string",
-                                "minLength": 1
                             }
                         },
                         "required": [
-                            "id",
-                            "ns"
+                            "id"
                         ],
                         "additionalProperties": false
                     },
