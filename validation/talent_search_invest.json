@@ -1,8 +1,8 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "$id": "https://schema.blueabel.org/hcn/HumanCapitalGrowthFund",
-    "x-context": "https://schema.blueabel.org/hcn",
-    "x-type": "HumanCapitalGrowthFund",
+    "@context": "https://schema.blueabel.org/hcn",
+    "@type": "HumanCapitalGrowthFund",
     "kind": "DecentralizedContract",
     "title": "Human Capital Growth Fund",
     "ns": "hcn",
