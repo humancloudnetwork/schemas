@@ -7,370 +7,372 @@
     "title": "Investment Fund",
     "ns": "hcn",
     "description": "Represents an investment fund entity, detailing its characteristics, status, and any associated verifiable presentations like social scores.",
-    "type": "object",
-    "properties": {
-        "id": {
-            "type": "string",
-            "title": "ID",
-            "description": "The unique identifier for the investment fund.",
-            "x-finalValidationRequired": true
-        },
-        "did": {
-            "type": "string",
-            "title": "DID",
-            "description": "Distributed Identifier of the investment fund.",
-            "x-finalValidationRequired": true
-        },
-        "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Creation Timestamp",
-            "description": "The timestamp when the investment fund was created.",
-            "x-finalValidationRequired": true
-        },
-        "updatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Update Timestamp",
-            "description": "The timestamp when the investment fund was last updated.",
-            "x-finalValidationRequired": true
-        },
-        "displayName": {
-            "type": [
-                "string",
-                "null"
-            ],
-            "title": "Display Name",
-            "description": "The publicly visible name of the investment fund."
-        },
-        "capitalCommitment": {
-            "type": "number",
-            "minimum": 0,
-            "title": "Capital Commitment",
-            "description": "The total amount of capital committed to the investment fund."
-        },
-        "status": {
-            "type": "string",
-            "enum": [
-                "CREATE",
-                "FREEZE",
-                "EXECUTE",
-                "FINALIZE",
-                "PAUSED",
-                "COMPLETED",
-                "DEPRECATED"
-            ],
-            "title": "Contract Lifecycle Status",
-            "description": "An enumeration that represents the various lifecycle stages of a smart contract on the blockchain.",
-            "$comment": "CREATE: Drafting, off-chain. | FREEZE: Deployed but halted. | EXECUTE: Active and operational. | FINALIZE: Nearing end of life. | PAUSED: Temporarily stopped. | COMPLETED: Finished execution. | DEPRECATED: No longer in use.",
-            "x-finalValidationRequired": true
-        },
-        "lp": {
-            "type": "array",
-            "items": {
-                "$ref": "#/definitions/entityMemoInput"
+    "validator": {
+        "type": "object",
+        "properties": {
+            "id": {
+                "type": "string",
+                "title": "ID",
+                "description": "The unique identifier for the investment fund.",
+                "x-finalValidationRequired": true
             },
-            "title": "Limited Partner",
-            "description": "The one/ones there provided the commited capital",
-            "minItems": 1
-        },
-        "gp": {
-            "type": "array",
-            "items": {
-                "$ref": "#/definitions/hcnEntityMemo"
+            "did": {
+                "type": "string",
+                "title": "DID",
+                "description": "Distributed Identifier of the investment fund.",
+                "x-finalValidationRequired": true
             },
-            "title": "General Partner",
-            "description": "The one/ones there manage how the capital should be allocated.",
-            "minItems": 1
-        },
-        "advisor": {
-            "type": "array",
-            "items": {
-                "$ref": "#/definitions/hcnEntityMemo"
+            "createdAt": {
+                "type": "string",
+                "format": "date-time",
+                "title": "Creation Timestamp",
+                "description": "The timestamp when the investment fund was created.",
+                "x-finalValidationRequired": true
             },
-            "title": "Advisor",
-            "description": "The one/ones there has the resposibilty for the fund and if the GP isnt the same as the advisor, then the GP will be working on behalf of the advisor.",
-            "minItems": 1
-        },
-        "purpose": {
-            "type": "object",
-            "properties": {
-                "type": {
-                    "type": "string",
-                    "enum": [
-                        "SCHEMA"
-                    ]
-                },
-                "schema": {
-                    "type": "object",
-                    "properties": {
-                        "id": {
-                            "type": "string",
-                            "minLength": 1
-                        },
-                        "ns": {
-                            "type": "string",
-                            "minLength": 1
-                        }
-                    },
-                    "required": [
-                        "id",
-                        "ns"
-                    ],
-                    "additionalProperties": false
-                },
-                "thesis": {
-                    "type": [
-                        "null",
-                        "string"
-                    ]
-                }
+            "updatedAt": {
+                "type": "string",
+                "format": "date-time",
+                "title": "Update Timestamp",
+                "description": "The timestamp when the investment fund was last updated.",
+                "x-finalValidationRequired": true
             },
-            "required": [
-                "type",
-                "schema"
-            ],
-            "additionalProperties": false
-        },
-        "lifespan": {
-            "type": "object",
-            "properties": {
-                "start": {
-                    "type": "string",
-                    "format": "date-time",
-                    "minLength": 1,
-                    "title": "Execute at",
-                    "description": "Represents the exact/earliest start time to trigger 'EXECUTE' of the fund contract. This is a non-nullable field that uses a custom scalar type 'Timestamp' to represent the time in milliseconds since the UNIX epoch as a string. If the execution is to start immediately after the 'FREEZE' event, a past date should be used. e.g. start: 1111111111111,"
-                },
-                "duration": {
-                    "type": "string",
-                    "pattern": "^P(?!$)(?:(\\d+Y)?(\\d+M)?(\\d+D)?)(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$",
-                    "title": "Lifespan",
-                    "description": "Represents the lifetime of the fund, defined with an ISO 8601 Duration string. For example, 'P30D' denotes a period of 30 days. This is a non-nullable field, meaning that a duration value must always be provided."
-                },
-                "extended": {
-                    "type": "boolean",
-                    "title": "Entended",
-                    "description": "Indicates whether the fund's lifespan has been extended beyond its original duration."
-                },
-                "endType": {
-                    "type": "string",
-                    "enum": [
-                        "EXACT",
-                        "FISCAL",
-                        "YEAR"
-                    ],
-                    "title": "End Date Basis",
-                    "description": "Defines the termination timing of the investment fund.",
-                    "$comment": "'EXACT' means ending exactly at 'start' + 'duration'. 'FISCAL' aligns the end with the fiscal year's end, and 'YEAR' aligns with the calendar year's end."
-                }
+            "displayName": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "Display Name",
+                "description": "The publicly visible name of the investment fund."
             },
-            "required": [
-                "start",
-                "duration",
-                "extended",
-                "endType"
-            ],
-            "additionalProperties": false
-        },
-        "allocation": {
-            "type": "object",
-            "title": "Allocation definitions",
-            "description": "Defines the set conditions and criteria for fund allocations, including the allocation instrument, method, fundee type, expiration period, and other conditions. If an expiration duration is set, the fundee needs to claim the allocated funds within the period determined by 'createdAt' plus the 'expiration' duration.",
-            "properties": {
-                "instrument": {
-                    "type": "array",
-                    "items": {
+            "capitalCommitment": {
+                "type": "number",
+                "minimum": 0,
+                "title": "Capital Commitment",
+                "description": "The total amount of capital committed to the investment fund."
+            },
+            "status": {
+                "type": "string",
+                "enum": [
+                    "CREATE",
+                    "FREEZE",
+                    "EXECUTE",
+                    "FINALIZE",
+                    "PAUSED",
+                    "COMPLETED",
+                    "DEPRECATED"
+                ],
+                "title": "Contract Lifecycle Status",
+                "description": "An enumeration that represents the various lifecycle stages of a smart contract on the blockchain.",
+                "$comment": "CREATE: Drafting, off-chain. | FREEZE: Deployed but halted. | EXECUTE: Active and operational. | FINALIZE: Nearing end of life. | PAUSED: Temporarily stopped. | COMPLETED: Finished execution. | DEPRECATED: No longer in use.",
+                "x-finalValidationRequired": true
+            },
+            "lp": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/entityMemoInput"
+                },
+                "title": "Limited Partner",
+                "description": "The one/ones there provided the commited capital",
+                "minItems": 1
+            },
+            "gp": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/hcnEntityMemo"
+                },
+                "title": "General Partner",
+                "description": "The one/ones there manage how the capital should be allocated.",
+                "minItems": 1
+            },
+            "advisor": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/hcnEntityMemo"
+                },
+                "title": "Advisor",
+                "description": "The one/ones there has the resposibilty for the fund and if the GP isnt the same as the advisor, then the GP will be working on behalf of the advisor.",
+                "minItems": 1
+            },
+            "purpose": {
+                "type": "object",
+                "properties": {
+                    "type": {
                         "type": "string",
                         "enum": [
-                            "GRANT"
+                            "SCHEMA"
                         ]
                     },
-                    "title": "Allocation Instrument",
-                    "description": "The instruments or methods available for allocating funds."
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "minLength": 1
+                            },
+                            "ns": {
+                                "type": "string",
+                                "minLength": 1
+                            }
+                        },
+                        "required": [
+                            "id",
+                            "ns"
+                        ],
+                        "additionalProperties": false
+                    },
+                    "thesis": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    }
                 },
-                "method": {
-                    "type": "string",
-                    "enum": [
-                        "AUTOMATED",
-                        "COMMITTEE"
-                    ],
-                    "title": "Allocation Method",
-                    "description": "Represents the methods by which the fund allocates its resources.",
-                    "$comment": "'AUTOMATED': Allocation based on predefined criteria and algorithm. 'COMMITTEE': Allocation decisions made by a group through deliberation and consensus."
-                },
-                "fundeeType": {
-                    "type": "array",
-                    "items": {
+                "required": [
+                    "type",
+                    "schema"
+                ],
+                "additionalProperties": false
+            },
+            "lifespan": {
+                "type": "object",
+                "properties": {
+                    "start": {
+                        "type": "string",
+                        "format": "date-time",
+                        "minLength": 1,
+                        "title": "Execute at",
+                        "description": "Represents the exact/earliest start time to trigger 'EXECUTE' of the fund contract. This is a non-nullable field that uses a custom scalar type 'Timestamp' to represent the time in milliseconds since the UNIX epoch as a string. If the execution is to start immediately after the 'FREEZE' event, a past date should be used. e.g. start: 1111111111111,"
+                    },
+                    "duration": {
+                        "type": "string",
+                        "pattern": "^P(?!$)(?:(\\d+Y)?(\\d+M)?(\\d+D)?)(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$",
+                        "title": "Lifespan",
+                        "description": "Represents the lifetime of the fund, defined with an ISO 8601 Duration string. For example, 'P30D' denotes a period of 30 days. This is a non-nullable field, meaning that a duration value must always be provided."
+                    },
+                    "extended": {
+                        "type": "boolean",
+                        "title": "Entended",
+                        "description": "Indicates whether the fund's lifespan has been extended beyond its original duration."
+                    },
+                    "endType": {
                         "type": "string",
                         "enum": [
-                            "Person",
-                            "Profile"
-                        ]
-                    },
-                    "title": "Fundee type",
-                    "description": "Determines the type of fundee (e.g., individual, organization) eligible for the allocation."
+                            "EXACT",
+                            "FISCAL",
+                            "YEAR"
+                        ],
+                        "title": "End Date Basis",
+                        "description": "Defines the termination timing of the investment fund.",
+                        "$comment": "'EXACT' means ending exactly at 'start' + 'duration'. 'FISCAL' aligns the end with the fiscal year's end, and 'YEAR' aligns with the calendar year's end."
+                    }
                 },
-                "expiration": {
-                    "type": "string",
-                    "pattern": "^P(?!$)(?:(\\d+Y)?(\\d+M)?(\\d+D)?)(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$",
-                    "title": "Expire after",
-                    "description": "The duration after which an unclaimed allocation will expire. The expiration period starts from 'createdAt' at the allocation object and lasts for the specified duration."
-                },
-                "distance": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/InvestmentFundAllocationDistanceObject"
-                    },
-                    "title": "Fund Allocation Scope",
-                    "description": "Defines the diverse scopes for fund allocation, encompassing geographical areas, industry sectors, networks, and organizational entities. This attribute facilitates targeted allocation strategies, such as channeling capital to specific industries, supporting networks in smart city infrastructures, or focusing on distinct geographical regions. It enables precise and strategic distribution of funds across various dimensions and contexts."
-                },
-                "conditions": {
-                    "type": "object",
-                    "properties": {
-                        "id": {
+                "required": [
+                    "start",
+                    "duration",
+                    "extended",
+                    "endType"
+                ],
+                "additionalProperties": false
+            },
+            "allocation": {
+                "type": "object",
+                "title": "Allocation definitions",
+                "description": "Defines the set conditions and criteria for fund allocations, including the allocation instrument, method, fundee type, expiration period, and other conditions. If an expiration duration is set, the fundee needs to claim the allocated funds within the period determined by 'createdAt' plus the 'expiration' duration.",
+                "properties": {
+                    "instrument": {
+                        "type": "array",
+                        "items": {
                             "type": "string",
-                            "minLength": 1
-                        },
-                        "description": {
-                            "type": [
-                                "null",
-                                "string"
+                            "enum": [
+                                "GRANT"
                             ]
                         },
-                        "decay": {
-                            "type": "boolean"
-                        },
-                        "decayGracePeriod": {
-                            "type": "string",
-                            "pattern": "^P(?!$)(?:(\\d+Y)?(\\d+M)?(\\d+D)?)(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$"
-                        },
-                        "decayPeriod": {
-                            "type": "string",
-                            "pattern": "^P(?!$)(?:(\\d+Y)?(\\d+M)?(\\d+D)?)(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$"
-                        }
+                        "title": "Allocation Instrument",
+                        "description": "The instruments or methods available for allocating funds."
                     },
-                    "required": [
-                        "id",
-                        "decay",
-                        "decayGracePeriod",
-                        "decayPeriod"
-                    ],
-                    "additionalProperties": false
-                }
-            },
-            "required": [
-                "instrument",
-                "method",
-                "fundeeType",
-                "expiration",
-                "distance",
-                "conditions"
-            ],
-            "additionalProperties": false
-        },
-        "termination": {
-            "type": "object",
-            "properties": {
-                "proceeds": {
-                    "type": "string",
-                    "enum": [
-                        "FORWARD"
-                    ]
+                    "method": {
+                        "type": "string",
+                        "enum": [
+                            "AUTOMATED",
+                            "COMMITTEE"
+                        ],
+                        "title": "Allocation Method",
+                        "description": "Represents the methods by which the fund allocates its resources.",
+                        "$comment": "'AUTOMATED': Allocation based on predefined criteria and algorithm. 'COMMITTEE': Allocation decisions made by a group through deliberation and consensus."
+                    },
+                    "fundeeType": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "enum": [
+                                "Person",
+                                "Profile"
+                            ]
+                        },
+                        "title": "Fundee type",
+                        "description": "Determines the type of fundee (e.g., individual, organization) eligible for the allocation."
+                    },
+                    "expiration": {
+                        "type": "string",
+                        "pattern": "^P(?!$)(?:(\\d+Y)?(\\d+M)?(\\d+D)?)(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$",
+                        "title": "Expire after",
+                        "description": "The duration after which an unclaimed allocation will expire. The expiration period starts from 'createdAt' at the allocation object and lasts for the specified duration."
+                    },
+                    "distance": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/InvestmentFundAllocationDistanceObject"
+                        },
+                        "title": "Fund Allocation Scope",
+                        "description": "Defines the diverse scopes for fund allocation, encompassing geographical areas, industry sectors, networks, and organizational entities. This attribute facilitates targeted allocation strategies, such as channeling capital to specific industries, supporting networks in smart city infrastructures, or focusing on distinct geographical regions. It enables precise and strategic distribution of funds across various dimensions and contexts."
+                    },
+                    "conditions": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "minLength": 1
+                            },
+                            "description": {
+                                "type": [
+                                    "null",
+                                    "string"
+                                ]
+                            },
+                            "decay": {
+                                "type": "boolean"
+                            },
+                            "decayGracePeriod": {
+                                "type": "string",
+                                "pattern": "^P(?!$)(?:(\\d+Y)?(\\d+M)?(\\d+D)?)(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$"
+                            },
+                            "decayPeriod": {
+                                "type": "string",
+                                "pattern": "^P(?!$)(?:(\\d+Y)?(\\d+M)?(\\d+D)?)(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$"
+                            }
+                        },
+                        "required": [
+                            "id",
+                            "decay",
+                            "decayGracePeriod",
+                            "decayPeriod"
+                        ],
+                        "additionalProperties": false
+                    }
                 },
-                "distribution": {
-                    "type": [
-                        "null",
-                        "string"
-                    ]
-                }
+                "required": [
+                    "instrument",
+                    "method",
+                    "fundeeType",
+                    "expiration",
+                    "distance",
+                    "conditions"
+                ],
+                "additionalProperties": false
             },
-            "required": [
-                "proceeds"
-            ],
-            "additionalProperties": false
-        }
-    },
-    "required": [
-        "purpose",
-        "lifespan",
-        "allocation",
-        "termination",
-        "capitalCommitment",
-        "lp",
-        "gp",
-        "advisor"
-    ],
-    "additionalProperties": false,
-    "definitions": {
-        "entityMemoInput": {
-            "type": "object",
-            "properties": {
-                "did": {
-                    "type": "string",
-                    "minLength": 1
+            "termination": {
+                "type": "object",
+                "properties": {
+                    "proceeds": {
+                        "type": "string",
+                        "enum": [
+                            "FORWARD"
+                        ]
+                    },
+                    "distribution": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    }
                 },
-                "displayName": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "did"
-            ],
-            "additionalProperties": false
-        },
-        "hcnEntityMemo": {
-            "type": "object",
-            "properties": {
-                "did": {
-                    "type": "string",
-                    "enum": [
-                        "did:web:humancloud.network"
-                    ]
-                },
-                "displayName": {
-                    "type": "string",
-                    "enum": [
-                        "The HumanCloud Network"
-                    ]
-                }
+                "required": [
+                    "proceeds"
+                ],
+                "additionalProperties": false
             }
         },
-        "InvestmentFundAllocationDistanceObject": {
-            "type": "object",
-            "properties": {
-                "boundry": {
-                    "type": "string",
-                    "minLength": 1,
-                    "title": "Boundary Identifier",
-                    "description": "Uniquely identifies the target area or entity for fund allocation. This ID can represent various allocation scopes such as specific geographic regions, industry sectors, or network segments."
+        "required": [
+            "purpose",
+            "lifespan",
+            "allocation",
+            "termination",
+            "capitalCommitment",
+            "lp",
+            "gp",
+            "advisor"
+        ],
+        "additionalProperties": false,
+        "definitions": {
+            "entityMemoInput": {
+                "type": "object",
+                "properties": {
+                    "did": {
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "displayName": {
+                        "type": "string"
+                    }
                 },
-                "boundryType": {
-                    "type": "string",
-                    "enum": [
-                        "INTERNAL",
-                        "LOCAL",
-                        "REGIONAL",
-                        "NATIONAL",
-                        "INDUSTRY",
-                        "NETWORK"
-                    ],
-                    "title": "Boundary Type",
-                    "description": "Defines the category of the allocation boundary. Includes options like internal, local, regional, national, industry-specific, or network-based, offering flexibility in targeting fund distribution to diverse and strategic areas.",
-                    "$comment": "Describes the scope of fund allocation boundaries. 'INTERNAL': Within an entity. 'LOCAL': City-level. 'REGIONAL': Larger areas like boroughs. 'NATIONAL': Country or state level. 'INDUSTRY': Specific industry sectors. 'NETWORK': Global networks, location-independent."
-                },
-                "allocationRatio": {
-                    "type": "number",
-                    "minimum": 0,
-                    "title": "Allocation Ratio",
-                    "description": "Specifies the proportion of funds allocated to a particular boundary. This ratio is crucial for balancing the distribution of funds across various categories, ensuring that each area or sector receives an allocation in line with its strategic importance or operational needs."
+                "required": [
+                    "did"
+                ],
+                "additionalProperties": false
+            },
+            "hcnEntityMemo": {
+                "type": "object",
+                "properties": {
+                    "did": {
+                        "type": "string",
+                        "enum": [
+                            "did:web:humancloud.network"
+                        ]
+                    },
+                    "displayName": {
+                        "type": "string",
+                        "enum": [
+                            "The HumanCloud Network"
+                        ]
+                    }
                 }
             },
-            "required": [
-                "boundry",
-                "boundryType",
-                "allocationRatio"
-            ]
+            "InvestmentFundAllocationDistanceObject": {
+                "type": "object",
+                "properties": {
+                    "boundry": {
+                        "type": "string",
+                        "minLength": 1,
+                        "title": "Boundary Identifier",
+                        "description": "Uniquely identifies the target area or entity for fund allocation. This ID can represent various allocation scopes such as specific geographic regions, industry sectors, or network segments."
+                    },
+                    "boundryType": {
+                        "type": "string",
+                        "enum": [
+                            "INTERNAL",
+                            "LOCAL",
+                            "REGIONAL",
+                            "NATIONAL",
+                            "INDUSTRY",
+                            "NETWORK"
+                        ],
+                        "title": "Boundary Type",
+                        "description": "Defines the category of the allocation boundary. Includes options like internal, local, regional, national, industry-specific, or network-based, offering flexibility in targeting fund distribution to diverse and strategic areas.",
+                        "$comment": "Describes the scope of fund allocation boundaries. 'INTERNAL': Within an entity. 'LOCAL': City-level. 'REGIONAL': Larger areas like boroughs. 'NATIONAL': Country or state level. 'INDUSTRY': Specific industry sectors. 'NETWORK': Global networks, location-independent."
+                    },
+                    "allocationRatio": {
+                        "type": "number",
+                        "minimum": 0,
+                        "title": "Allocation Ratio",
+                        "description": "Specifies the proportion of funds allocated to a particular boundary. This ratio is crucial for balancing the distribution of funds across various categories, ensuring that each area or sector receives an allocation in line with its strategic importance or operational needs."
+                    }
+                },
+                "required": [
+                    "boundry",
+                    "boundryType",
+                    "allocationRatio"
+                ]
+            }
         }
     }
 }
