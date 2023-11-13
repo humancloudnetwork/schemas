@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "https://blueabel.org/api/schema/hcn/talent-search-invest",
+    "$id": "https://schema.blueabel.org/hcn/HumanCapitalGrowthFund",
     "@context": "https://schema.blueabel.org/hcn",
     "@type": "HumanCapitalGrowthFund",
     "kind": "DecentralizedContract",
