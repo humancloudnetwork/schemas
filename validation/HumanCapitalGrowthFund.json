@@ -1,0 +1,289 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://schema.blueabel.org/hcn/HumanCapitalGrowthFund",
+    "@context": "https://schema.blueabel.org/hcn",
+    "@type": "HumanCapitalGrowthFund",
+    "kind": "DecentralizedContract",
+    "title": "Human Capital Growth Fund",
+    "ns": "hcn",
+    "description": "This schema delineates a versatile fund designed for investing in human capital, aiming to nurture and develop workforce talent across diverse industries and geographical regions. It embodies the adaptability to channel investments through digital networks and within organizations, ensuring a broad and impactful reach in enhancing human resource capabilities.",
+    "_parentSchema": "https://schema.blueabel.org/hcn/InvestmentFund",
+    "type": "object",
+    "properties": {
+        "displayName": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "capitalCommitment": {
+            "type": "number",
+            "minimum": 0
+        },
+        "lp": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/entityMemoInput"
+            }
+        },
+        "gp": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/hcnEntityMemo"
+            }
+        },
+        "advisor": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/hcnEntityMemo"
+            }
+        },
+        "purpose": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "SCHEMA"
+                    ]
+                },
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "minLength": 1
+                        },
+                        "ns": {
+                            "type": "string",
+                            "minLength": 1
+                        }
+                    },
+                    "required": [
+                        "id",
+                        "ns"
+                    ],
+                    "additionalProperties": false
+                },
+                "thesis": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
+            },
+            "required": [
+                "type",
+                "schema"
+            ],
+            "additionalProperties": false
+        },
+        "lifespan": {
+            "type": "object",
+            "properties": {
+                "start": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "duration": {
+                    "type": "string",
+                    "pattern": "^P(?!$)(?:(\\d+Y)?(\\d+M)?(\\d+D)?)(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$"
+                },
+                "extended": {
+                    "type": "boolean"
+                },
+                "endType": {
+                    "type": "string",
+                    "enum": [
+                        "EXACT"
+                    ]
+                }
+            },
+            "required": [
+                "start",
+                "duration",
+                "extended",
+                "endType"
+            ],
+            "additionalProperties": false
+        },
+        "allocation": {
+            "type": "object",
+            "properties": {
+                "instrument": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "GRANT"
+                        ]
+                    }
+                },
+                "method": {
+                    "type": "string",
+                    "enum": [
+                        "AUTOMATED"
+                    ]
+                },
+                "fundeeType": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "Person",
+                            "Profile"
+                        ]
+                    }
+                },
+                "expiration": {
+                    "type": "string",
+                    "pattern": "^P(?!$)(?:(\\d+Y)?(\\d+M)?(\\d+D)?)(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$"
+                },
+                "distance": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/InvestmentFundAllocationDistanceObject"
+                    }
+                },
+                "conditions": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "minLength": 1
+                        },
+                        "description": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "decay": {
+                            "type": "boolean"
+                        },
+                        "decayGracePeriod": {
+                            "type": "string",
+                            "pattern": "^P(?!$)(?:(\\d+Y)?(\\d+M)?(\\d+D)?)(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$"
+                        },
+                        "decayPeriod": {
+                            "type": "string",
+                            "pattern": "^P(?!$)(?:(\\d+Y)?(\\d+M)?(\\d+D)?)(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$"
+                        }
+                    },
+                    "required": [
+                        "id",
+                        "decay",
+                        "decayGracePeriod",
+                        "decayPeriod"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "instrument",
+                "method",
+                "fundeeType",
+                "expiration",
+                "distance",
+                "conditions"
+            ],
+            "additionalProperties": false
+        },
+        "termination": {
+            "type": "object",
+            "properties": {
+                "proceeds": {
+                    "type": "string",
+                    "enum": [
+                        "FORWARD"
+                    ]
+                },
+                "distribution": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
+            },
+            "required": [
+                "proceeds"
+            ],
+            "additionalProperties": false
+        }
+    },
+    "required": [
+        "purpose",
+        "lifespan",
+        "allocation",
+        "termination",
+        "capitalCommitment",
+        "lp",
+        "gp",
+        "advisor"
+    ],
+    "additionalProperties": false,
+    "definitions": {
+        "entityMemoInput": {
+            "type": "object",
+            "properties": {
+                "did": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "displayName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "did"
+            ],
+            "additionalProperties": false
+        },
+        "hcnEntityMemo": {
+            "type": "object",
+            "properties": {
+                "did": {
+                    "type": "string",
+                    "enum": [
+                        "did:web:humancloud.network"
+                    ]
+                },
+                "displayName": {
+                    "type": "string",
+                    "enum": [
+                        "The HumanCloud Network"
+                    ]
+                }
+            }
+        },
+        "InvestmentFundAllocationDistanceObject": {
+            "type": "object",
+            "properties": {
+                "boundry": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "boundryType": {
+                    "type": "string",
+                    "enum": [
+                        "INTERNAL",
+                        "LOCAL",
+                        "REGIONAL",
+                        "NATIONAL",
+                        "INDUSTRY",
+                        "NETWORK"
+                    ]
+                },
+                "allocationRatio": {
+                    "type": "number",
+                    "minimum": 0
+                }
+            },
+            "required": [
+                "boundry",
+                "boundryType",
+                "allocationRatio"
+            ]
+        }
+    }
+}
