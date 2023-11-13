@@ -1,5 +1,13 @@
 {
+    "$schema": "http://json-schema.org/draft-07/schema#",
     "$id": "https://blueabel.org/api/schema/hcn/talent-search-invest",
+    "@context": "https://schema.blueabel.org/hcn",
+    "@type": "HumanCapitalGrowthFund",
+    "kind": "DecentralizedContract",
+    "title": "Human Capital Growth Fund",
+    "ns": "hcn",
+    "description": "This schema delineates a versatile fund designed for investing in human capital, aiming to nurture and develop workforce talent across diverse industries and geographical regions. It embodies the adaptability to channel investments through digital networks and within organizations, ensuring a broad and impactful reach in enhancing human resource capabilities.",
+    "_parentSchema": "https://schema.blueabel.org/hcn/InvestmentFund",
     "type": "object",
     "properties": {
         "displayName": {

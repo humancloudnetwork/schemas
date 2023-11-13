@@ -36,7 +36,10 @@
             "x-finalValidationRequired": true
         },
         "displayName": {
-            "type": "string",
+            "type": [
+                "string",
+                "null"
+            ],
             "title": "Display Name",
             "description": "The publicly visible name of the investment fund."
         },
