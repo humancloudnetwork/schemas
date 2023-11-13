@@ -3,6 +3,7 @@
     "$id": "https://schema.blueabel.org/hcn/InvestmentFund",
     "@context": "https://schema.blueabel.org/hcn",
     "@type": "InvestmentFund",
+    "kind": "DecentralizedContract",
     "title": "Investment Fund",
     "ns": "hcn",
     "description": "Represents an investment fund entity, detailing its characteristics, status, and any associated verifiable presentations like social scores.",
