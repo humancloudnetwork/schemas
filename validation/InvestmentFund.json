@@ -1,9 +1,12 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "$id": "https://schema.blueabel.org/hcn/InvestmentFund",
-    "type": "object",
+    "@context": "https://schema.blueabel.org/hcn",
+    "@type": "InvestmentFund",
     "title": "Investment Fund",
+    "ns": "hcn",
     "description": "Represents an investment fund entity, detailing its characteristics, status, and any associated verifiable presentations like social scores.",
+    "type": "object",
     "properties": {
         "id": {
             "type": "string",
