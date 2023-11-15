@@ -17,14 +17,23 @@
                     "null"
                 ]
             },
-            "capitalCommitment": {
-                "type": "number",
-                "minimum": 0
-            },
             "lp": {
                 "type": "array",
                 "items": {
-                    "$ref": "#/definitions/entityMemoInput"
+                    "type": "object",
+                    "properties": {
+                        "entity": {
+                            "$ref": "#/definitions/entityMemoInput"
+                        },
+                        "amount": {
+                            "type": "number",
+                            "minimum": 0
+                        }
+                    },
+                    "required": [
+                        "entity",
+                        "amount"
+                    ]
                 }
             },
             "gp": {
