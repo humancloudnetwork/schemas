@@ -44,12 +44,6 @@
                 "title": "Display Name",
                 "description": "The publicly visible name of the investment fund."
             },
-            "capitalCommitment": {
-                "type": "number",
-                "minimum": 0,
-                "title": "Capital Commitment",
-                "description": "The total amount of capital committed to the investment fund."
-            },
             "status": {
                 "type": "string",
                 "enum": [
