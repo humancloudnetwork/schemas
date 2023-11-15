@@ -11,6 +11,9 @@
     "validator": {
         "type": "object",
         "properties": {
+            "currency": {
+                "$ref": "#/definitions/currencyMTS"
+            },
             "displayName": {
                 "type": [
                     "string",
@@ -217,6 +220,7 @@
             }
         },
         "required": [
+            "currency",
             "purpose",
             "lifespan",
             "allocation",
@@ -287,6 +291,41 @@
                     "boundry",
                     "boundryType",
                     "allocationRatio"
+                ]
+            },
+            "currencyMTS": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "enum": [
+                            "MTS"
+                        ]
+                    },
+                    "cc": {
+                        "type": "string",
+                        "enum": [
+                            "MTS"
+                        ]
+                    },
+                    "symbol": {
+                        "type": "string",
+                        "enum": [
+                            "MTS"
+                        ]
+                    },
+                    "name": {
+                        "type": "string",
+                        "enum": [
+                            "Mootos"
+                        ]
+                    }
+                },
+                "required": [
+                    "id",
+                    "cc",
+                    "symbol",
+                    "name"
                 ]
             }
         }
