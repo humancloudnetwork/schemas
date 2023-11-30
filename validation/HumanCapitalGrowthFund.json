@@ -90,6 +90,27 @@
                 ],
                 "additionalProperties": false
             },
+            "subscription": {
+                "type": "object",
+                "properties": {
+                    "minimumTicketSize": {
+                        "type": "number",
+                        "minimum": 1000
+                    },
+                    "access": {
+                        "type": "string",
+                        "enum": [
+                            "PRIVATE",
+                            "INVITE",
+                            "PUBLIC"
+                        ]
+                    }
+                },
+                "required": [
+                    "minimumTicketSize",
+                    "access"
+                ]
+            },
             "lifespan": {
                 "type": "object",
                 "properties": {
