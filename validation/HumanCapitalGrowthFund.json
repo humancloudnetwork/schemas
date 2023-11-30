@@ -14,10 +14,6 @@
             "currency": {
                 "$ref": "#/definitions/currencyMTS"
             },
-            "minimumTicketSize": {
-                "type": "number",
-                "minimum": 1000
-            },
             "displayName": {
                 "type": [
                     "string",
@@ -245,7 +241,6 @@
             }
         },
         "required": [
-            "minimumTicketSize",
             "currency",
             "purpose",
             "lifespan",
