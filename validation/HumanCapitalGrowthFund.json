@@ -20,6 +20,12 @@
                     "null"
                 ]
             },
+            "description": {
+                "type": [
+                    "string",
+                    "null"
+                ]
+            },
             "lp": {
                 "type": "array",
                 "items": {
