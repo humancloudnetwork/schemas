@@ -48,7 +48,7 @@
             "gp": {
                 "type": "array",
                 "items": {
-                    "$ref": "#/definitions/hcnEntityMemo"
+                    "$ref": "#/definitions/entityMemoInput"
                 }
             },
             "advisor": {
