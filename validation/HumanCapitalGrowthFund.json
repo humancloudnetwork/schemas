@@ -26,6 +26,20 @@
                     "null"
                 ]
             },
+            "mediaBgImg": {
+                "type": [
+                    "string",
+                    "null"
+                ]
+            },
+            "contributorAccess": {
+                "type": "string",
+                "enum": [
+                    "PRIVATE",
+                    "INVITE",
+                    "PUBLIC"
+                ]
+            },
             "lp": {
                 "type": "array",
                 "items": {
