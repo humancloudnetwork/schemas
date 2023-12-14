@@ -32,6 +32,38 @@
                     "null"
                 ]
             },
+            "features": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "name": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "description": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "img": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        }
+                    }
+                }
+            },
             "contributorAccess": {
                 "type": "string",
                 "enum": [
