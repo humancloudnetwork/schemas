@@ -329,13 +329,13 @@
             "InvestmentFundAllocationDistanceObject": {
                 "type": "object",
                 "properties": {
-                    "boundry": {
+                    "boundary": {
                         "type": "string",
                         "minLength": 1,
                         "title": "Boundary Identifier",
                         "description": "Uniquely identifies the target area or entity for fund allocation. This ID can represent various allocation scopes such as specific geographic regions, industry sectors, or network segments."
                     },
-                    "boundryType": {
+                    "boundaryType": {
                         "type": "string",
                         "enum": [
                             "INTERNAL",
@@ -357,8 +357,8 @@
                     }
                 },
                 "required": [
-                    "boundry",
-                    "boundryType",
+                    "boundary",
+                    "boundaryType",
                     "allocationRatio"
                 ]
             }

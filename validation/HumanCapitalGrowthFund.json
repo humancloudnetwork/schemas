@@ -340,11 +340,11 @@
             "InvestmentFundAllocationDistanceObject": {
                 "type": "object",
                 "properties": {
-                    "boundry": {
+                    "boundary": {
                         "type": "string",
                         "minLength": 1
                     },
-                    "boundryType": {
+                    "boundaryType": {
                         "type": "string",
                         "enum": [
                             "INTERNAL",
@@ -361,8 +361,8 @@
                     }
                 },
                 "required": [
-                    "boundry",
-                    "boundryType",
+                    "boundary",
+                    "boundaryType",
                     "allocationRatio"
                 ]
             },
